@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escáner de Código de Barras con QuaggaJS</title>
+    <!-- Incluir QuaggaJS desde un CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #scanner-container {
+            width: 100%;
+            height: 70vh;
+            position: relative;
+        }
+        #result {
+            font-size: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div id="scanner-container">
+    <div id="scanner"></div> <!-- Contenedor para el escáner -->
+</div>
+<div id="result">Escanea un código de barras</div>
+
+<script>
+    // Configuración e inicialización de QuaggaJS
+    Quagga.init({
+        inputStream: {
+            name: "Live",
+            type: "LiveStream",
+            target: document.querySelector('#scanner'), // El contenedor para el escáner
+            constraints: {
+                facingMode: "environment" // Utilizar la cámara trasera (si está disponible)
+            }
+        },
+        decoder: {
+            readers: ["ean_reader", "upc_reader"] // Decodificadores para diferentes tipos de códigos
+        }
+    }, function(err) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        Quagga.start(); // Iniciar el escáner
+    });
+
+    // Función para manejar el escaneo y redirigir
+    Quagga.onDetected(function(data) {
+        const barcode = data.codeResult.code; // Obtener el código escaneado
+        console.log("Código escaneado:", barcode);
+        
+        // Hacer una solicitud a la API de Open Food Facts para obtener información del producto
+        fetch(`https://world.openfoodfacts.org/api/v0/product/${barcode}.json`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 1) {
+                    // Si el producto está en la base de datos, redirigimos al usuario a su página
+                    const productUrl = `https://world.openfoodfacts.org/product/${barcode}`;
+                    window.location.href = productUrl; // Redirige a la página del producto
+                } else {
+                    // Si no se encuentra el producto, muestra un mensaje
+                    document.getElementById('result').innerHTML = "Producto no encontrado.";
+                }
+            })
+            .catch(error => {
+                console.error('Error al obtener los datos del producto:', error);
+                document.getElementById('result').innerHTML = "Error al obtener los datos del producto.";
+            });
+    });
+</script>
+
+</body>
+</html>
