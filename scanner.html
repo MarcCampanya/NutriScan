@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escáner de Código de Barras</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+  <script src="script.js"></script>
+</head>
+
+<body>
+  <main class="fullscreen">
+    <!-- Barra superior -->
+    <header class="top-bar">
+      <div class="left-section">
+        <button class="menu-toggle">☰</button>
+        <div class="logo">NutriScan</div>
+      </div>
+      <div class="auth-buttons">
+        <button class="login">Iniciar Sesión</button>
+        <button class="register">Registrarse</button>
+      </div>
+    </header>
+
+    <!-- Menú lateral -->
+    <nav class="side-menu">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="recetas.html">Recetas</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="historial.html">Historial</a></li>
+        <li><a href="scanner.html">Scanner</a></li>
+      </ul>
+    </nav>
+
+    <!-- Contenido -->
+    <section class="scanner-container">
+      <h1>Escáner de Código de Barras</h1>
+
+      <p class="scanner-instruction">Apunta la cámara al código de barras del producto para escanearlo.</p>
+      <video id="video" autoplay></video>
+      <p id="result">Esperando escaneo...</p>
+
+      <button class="info-btn" onclick="alternarInfo()">ℹ️ ¿Cómo funciona?</button>
+      <div class="info-box" id="info-box">
+        <p>Utiliza la cámara de tu dispositivo para escanear códigos de barras de productos alimenticios.  
+          NutriScan analizará el código y te proporcionará información detallada sobre los ingredientes y valores nutricionales.  
+          Si el producto está en nuestra base de datos, serás redirigido automáticamente a su página con más información.</p>
+     </div>
+      </div>
+
+    </section>
+
+
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuToggle = document.querySelector(".menu-toggle");
+      const sideMenu = document.querySelector(".side-menu");
+
+      menuToggle.addEventListener("click", () => {
+        sideMenu.classList.toggle("open");
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!sideMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+          sideMenu.classList.remove("open");
+        }
+      });
+    });
+
+    function alternarInfo() {
+      const infoBox = document.getElementById("info-box");
+      infoBox.style.display = (infoBox.style.display === "block") ? "none" : "block";
+    }
+  </script>
+</body>
+
+</html>

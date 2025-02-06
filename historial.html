@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Productos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="fullscreen">
+        <!-- Barra superior -->
+        <header class="top-bar">
+            <div class="left-section">
+                <button class="menu-toggle">☰</button>
+                <div class="logo">NutriScan</div>
+            </div>
+            <div class="auth-buttons">
+                <button class="login">Iniciar Sesión</button>
+                <button class="register">Registrarse</button>
+            </div>
+        </header>
+
+        <!-- Menú lateral -->
+        <nav class="side-menu">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="recetas.html">Recetas</a></li>
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="historial.html">Historial</a></li>
+                <li><a href="scanner.html">Scanner</a></li>
+            </ul>
+        </nav>
+
+        <!-- Contenedor de Historial -->
+        <div class="historial-container">
+            <h2>Historial de Productos</h2>
+            <ul id="listaHistorial">
+                <!-- Elementos generados dinámicamente -->
+            </ul>
+        </div>
+
+    </main>
+
+    <script src="historial.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuToggle = document.querySelector(".menu-toggle");
+            const sideMenu = document.querySelector(".side-menu");
+
+            menuToggle.addEventListener("click", () => {
+                sideMenu.classList.toggle("open");
+            });
+
+            document.addEventListener("click", (event) => {
+                if (!sideMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                    sideMenu.classList.remove("open");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

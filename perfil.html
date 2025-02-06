@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="fullscreen">
+        <!-- Barra superior -->
+        <header class="top-bar">
+            <div class="left-section">
+                <button class="menu-toggle">☰</button>
+                <div class="logo">NutriScan</div>
+            </div>
+            <div class="auth-buttons">
+                <button class="login">Iniciar Sesión</button>
+                <button class="register">Registrarse</button>
+                <button id="toggle-theme">🌙</button>
+            </div>
+        </header>
+
+        <!-- Menú lateral -->
+        <nav class="side-menu">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="recetas.html">Recetas</a></li>
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="historial.html">Historial</a></li>
+                <li><a href="scanner.html">Scanner</a></li>
+            </ul>
+        </nav>
+
+        <!-- Contenedor de Perfil -->
+        <div class="perfil-container">
+            <section id="informacion-basica">
+                <div class="informacion">
+                    <h2>Nombre del Usuario</h2>
+                    <p>Email: usuario@ejemplo.com</p>
+                </div>
+                <div class="avatar">
+                    <img src="img/perfil.jpg" alt="Avatar">
+                </div>
+            </section>
+            <section id="preferencias">
+                <h3>Preferencias y Restricciones Alimenticias</h3>
+                <input type="text" id="preferenciasInput" placeholder="Añadir preferencia/restricción">
+                <button class="btn" onclick="agregarPreferencia()">Añadir</button>
+                <ul id="listaPreferencias"></ul>
+            </section>
+            <section id="favoritos">
+                <h3>Productos Favoritos</h3>
+                <input type="text" id="favoritosInput" placeholder="Añadir producto favorito">
+                <button class="btn" onclick="agregarFavorito()">Añadir</button>
+                <ul id="listaFavoritos"></ul>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuToggle = document.querySelector(".menu-toggle");
+            const sideMenu = document.querySelector(".side-menu");
+            const themeToggle = document.getElementById("toggle-theme");
+            
+            menuToggle.addEventListener("click", () => {
+                sideMenu.classList.toggle("open");
+            });
+
+            themeToggle.addEventListener("click", () => {
+                document.body.classList.toggle("light-mode");
+                themeToggle.textContent = document.body.classList.contains("light-mode") ? "🌞" : "🌙";
+            });
+        });
+    </script>
+</body>
+</html>

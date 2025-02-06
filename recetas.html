@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recetas Saludables</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <html lang="es">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recetas Saludables</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <main class="fullscreen">
+      <!-- Barra superior -->
+      <header class="top-bar">
+        <div class="left-section">
+          <button class="menu-toggle">☰</button>
+          <div class="logo">NutriScan</div>
+        </div>
+        <div class="auth-buttons">
+          <button class="login">Iniciar Sesión</button>
+          <button class="register">Registrarse</button>
+        </div>
+      </header>
+
+      <!-- Menú lateral -->
+      <nav class="side-menu">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="recetas.html">Recetas</a></li>
+          <li><a href="perfil.html">Perfil</a></li>
+          <li><a href="historial.html">Historial</a></li>
+          <li><a href="scanner.html">Scanner</a></li>
+        </ul>
+      </nav>
+
+      <!-- Contenido -->
+      <section class="recetas-container">
+        <h1>Recetas Saludables</h1>
+        <p class="recetas-intro">Busca y filtra recetas saludables recomendadas por la comunidad.</p>
+
+        <!-- 🔥 Barra de búsqueda -->
+        <div class="search-bar">
+          <input type="text" id="search" placeholder="Buscar recetas..." onkeyup="filtrarRecetas()">
+        </div>
+
+        <!-- Lista de recetas -->
+        <div class="grid" id="recetas-grid">
+          <div class="receta" data-name="Ensalada de Quinoa">
+            <img src="/img/Receta1.jpg" alt="Ensalada de Quinoa">
+            <h3>Ensalada de Quinoa</h3>
+            <p>Rica en proteínas y fibra, ideal para una comida ligera y nutritiva.</p>
+          </div>
+          <div class="receta" data-name="Batido Detox">
+            <img src="img/Receta2.jpg" alt="Batido Detox">
+            <h3>Batido Detox</h3>
+            <p>Una combinación de frutas y vegetales para empezar el día con energía.</p>
+          </div>
+          <div class="receta" data-name="Tofu a la Plancha">
+            <img src="img/Receta3.jpg" alt="Tofu a la Plancha">
+            <h3>Tofu a la Plancha</h3>
+            <p>Un platillo vegetariano fácil y lleno de sabor.</p>
+          </div>
+          <div class="receta" data-name="Avena con Frutas">
+            <img src="img/Receta4.jpg" alt="Avena con Frutas">
+            <h3>Avena con Frutas</h3>
+            <p>Perfecto para un desayuno saludable y equilibrado.</p>
+          </div>
+        </div>
+
+        <!-- 🔥 Mensaje cuando no hay resultados -->
+        <p id="no-results" class="no-results" style="display: none;">No se encontraron recetas.</p>
+      </section>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const menuToggle = document.querySelector(".menu-toggle");
+        const sideMenu = document.querySelector(".side-menu");
+
+        menuToggle.addEventListener("click", () => {
+          sideMenu.classList.toggle("open");
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!sideMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+            sideMenu.classList.remove("open");
+          }
+        });
+      });
+    </script>
+  </body>
+
+  </html>
