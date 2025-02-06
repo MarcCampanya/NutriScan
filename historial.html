@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historial de Productos</title>
+    <title>Historial</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -34,30 +34,43 @@
 
         <!-- Contenedor de Historial -->
         <div class="historial-container">
-            <h2>Historial de Productos</h2>
-            <ul id="listaHistorial">
-                <!-- Elementos generados dinámicamente -->
+            <h2>Historial de Recetas</h2>
+            <ul class="historial-lista">
+                <li>Ensalada César</li>
+                <li>Pasta Alfredo</li>
+                <li>Pan integral casero</li>
+                <li>Yogur natural sin azúcar</li>
+                <li>Barra de proteínas vegana</li>
             </ul>
         </div>
 
+        <div class="historial-container">
+            <h2>Historial de Productos Escaneados</h2>
+            <ul class="historial-lista">
+                <li>CocaCola</li>
+                <li>Bifrutas</li>
+                <li>Nocilla</li>
+                <li>Yogur natural sin azúcar</li>
+                <li>Detergente</li>
+            </ul>
+        </div>
     </main>
-
-    <script src="historial.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const menuToggle = document.querySelector(".menu-toggle");
-            const sideMenu = document.querySelector(".side-menu");
-
-            menuToggle.addEventListener("click", () => {
-                sideMenu.classList.toggle("open");
-            });
-
-            document.addEventListener("click", (event) => {
-                if (!sideMenu.contains(event.target) && !menuToggle.contains(event.target)) {
-                    sideMenu.classList.remove("open");
-                }
-            });
-        });
-    </script>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const menuToggle = document.querySelector(".menu-toggle");
+        const sideMenu = document.querySelector(".side-menu");
+        const themeToggle = document.getElementById("toggle-theme");
+        
+        menuToggle.addEventListener("click", () => {
+            sideMenu.classList.toggle("open");
+        });
+
+        themeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("light-mode");
+            themeToggle.textContent = document.body.classList.contains("light-mode") ? "🌞" : "🌙";
+        });
+    });
+</script>
 </html>
+
